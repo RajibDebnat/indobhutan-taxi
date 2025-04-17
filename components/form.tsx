@@ -31,9 +31,20 @@ export default function Home() {
   const defaultLocations = [
     "IXB Bagdogra Airport",
     "Jaigaon",
-    "Phuentsholing","Bhutan",
+    "Phuentsholing, Bhutan",
     "Siliguri",
-    "Darjeeling"
+    "Kolkata",
+    "Thimphu, Bhutan",
+    "Alipurduar",
+    "Darjeeling",
+    "Gangtok",
+    "kalimpong",
+    
+   
+
+
+
+
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
