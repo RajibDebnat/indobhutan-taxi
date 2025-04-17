@@ -1,3 +1,32 @@
 @import "tailwindcss";
 
 
+@tailwind utilities;
+
+@layer utilities {
+    .home-hero {
+      position: relative;
+      background-image: url('/bhutan.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+  
+    .home-hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+      z-index: 1;
+    }
+  
+    .home-hero > * {
+      position: relative;
+      z-index: 2;
+    }
+  }
+  
