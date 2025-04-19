@@ -48,11 +48,11 @@ export default function TourPackagesHero() {
               key={idx}
               className="bg-white border shadow-md rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] active:scale-[0.97]"
             >
-              <img
+              {/* <img
                 src={tour.image}
                 alt={tour.title}
                 className="w-full h-48 object-cover"
-              />
+              /> */}
               <div className="p-5">
                 <h3 className="text-xl font-semibold font-montserrat text-blue-800">
                   {tour.title}
