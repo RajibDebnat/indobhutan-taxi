@@ -47,7 +47,7 @@ export default function Navbar() {
           <ul className="flex flex-col gap-4 px-4 py-3 text-gray-800 font-medium">
             <li><Link href="#">Home</Link></li>
             <li><Link href="">Blog</Link></li>
-            <li><Link href="/travelpacages">Services</Link></li>
+            <li><Link href="/travelpacages">Pacages</Link></li>
             <li><Link href="/car-rent">Car-rent</Link></li>
             <li className="flex items-center gap-2">
               <span className="bg-blue-600 text-white px-3 py-1 rounded text-sm font-semibold">
