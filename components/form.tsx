@@ -319,7 +319,7 @@ export default function Home() {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            className="input h-24"
+            className="input h-24 text-black"
             placeholder="Any special instructions or requests"
             title="Message"
           />

@@ -9,7 +9,7 @@ import HeroSection from "@/components/Home";
 export default function Home() {
   return (
   <main  >
-    <Navbar />
+
 <HeroSection />
 <div className="px-24  max-xl:px-12 max-md:px-10 max-sm:px-5 pt-0">
 
@@ -17,7 +17,7 @@ export default function Home() {
     <Features />
      <OurServices />
      <SavaariSection />
-     <Footer />
+    
 </div>
   </main>  
 

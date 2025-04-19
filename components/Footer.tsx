@@ -56,9 +56,15 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="border-t pt-6 text-center text-sm text-gray-500 mb-5">
-        &copy; {new Date().getFullYear()} Indo-Bhutan Taxi Service Car Rentals. All rights reserved.
-      </div>
+      <div className="border-t flex flex-col sm:flex-row justify-between pt-6 text-center text-sm text-gray-500 mb-5 gap-2">
+  <span>&copy; {new Date().getFullYear()} Indo-Bhutan Travels. All rights reserved.</span>
+  <span>
+    Designed by <strong>Rajib Debnath</strong>.{' '}
+    <Link href="https://www.rajibdev.site/" className="text-blue-500 hover:underline">
+      Get your website from RajibDev
+    </Link>
+  </span>
+</div>
     </footer>
   );
 };

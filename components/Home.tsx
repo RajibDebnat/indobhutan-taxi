@@ -5,8 +5,8 @@ export default function HeroSection() {
     return (
       <main className="home-hero  bg-cover bg-center flex items-center justify-center  text-white">
         <div className=" bg-opacity-50 p-6 rounded-xl text-center">
-          <h1 className="text-4xl md:text-6xl font-bold">
-            Welcome to Indo-Bhutan Taxi Service
+          <h1 className="text-4xl font  md:text-6xl font-bold">
+            Welcome to Indo-Bhutan Travels
           </h1>
           <CabBookingForm />
         </div>

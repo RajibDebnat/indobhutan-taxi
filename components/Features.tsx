@@ -21,7 +21,7 @@ const Features = () => {
   return (
     <section className="bg-[#f2f9fd] py-10 px-4 md:px-8 text-center">
       <h2 className="text-2xl md:text-3xl font-bold text-blue-800 mb-8">
-        WHAT SETS <span className="text-blue-600">INDOBHUTAN TAXI SERVICE</span> APART?
+        WHAT SETS <span className="text-blue-600">INDO-BHUTAN Travels</span> APART?
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {features.map((feature, index) => (

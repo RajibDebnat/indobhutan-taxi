@@ -3,6 +3,7 @@
 
 @tailwind utilities;
 
+
 @layer utilities {
     .home-hero {
       position: relative;

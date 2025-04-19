@@ -7,7 +7,7 @@ const data = [
     image: "/details/Pan-India Presence.webp", // replace with your actual image path
   },
   {
-    title: "Why Road Trips with INDO-BHUTAN TAXI SERVICE Are Special",
+    title: "Why Road Trips with INDO-BHUTAN TRAVELS Are Special",
     description: "Enjoy every mile with clean cars, flexible packages & friendly chauffeurs. Travel isn’t about the destination, it’s about the ride.",
     image: "/details/road-trip-with-family.jpg",
   },
@@ -37,8 +37,8 @@ const data = [
     image: "/details/delhi-trip-plan-india.webp",
   },
   {
-    title: "Trust the Journey – Trust INDO-BHUTAN TAXI SERVICE",
-    description: "We believe travel starts the moment you book your cab. From smooth bookings to great experiences, INDO-BHUTAN TAXI SERVICE is your road partner.",
+    title: "Trust the Journey – Trust INDO-BHUTAN TRAVELS",
+    description: "We believe travel starts the moment you book your cab. From smooth bookings to great experiences, INDO-BHUTAN TRAVELS is your road partner.",
     image: "/details/driver2.jpg",
   },
 ];
@@ -50,7 +50,7 @@ const  SavariSection = () => {
         <h2 className="text-3xl font-bold mb-2 text-blue-800">
           India's Largest Intercity and Local Cab Services
         </h2>
-        <p className="text-gray-600 mb-10">Travel begins with INDO-BHUTAN TAXI SERVICE.</p>
+        <p className="text-gray-600 mb-10">Travel begins with INDO-BHUTAN TRAVELS.</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-10 max-w-7xl mx-auto">

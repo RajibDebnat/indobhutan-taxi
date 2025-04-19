@@ -50,8 +50,8 @@ const OurServices = () => {
   ];
 
   return (
-    <section className="py-12 px-4 md:px-8 bg-white text-center">
-      <h2 className="text-3xl font-bold text-blue-800 mb-10">OUR SERVICES</h2>
+    <section className="py-12 px-4 md:px-8 bg-white ">
+      <h2 className="text-3xl font-bold text-blue-800 mb-10 text-center">OUR SERVICES</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {services.map((service, index) => (
           <div

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-
+import Link from "next/link";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -13,14 +13,14 @@ export default function Navbar() {
       {/* Main navbar */}
       <nav className="flex justify-between items-center px-4 py-3  max-lg:px-0">
         {/* Logo */}
-        <div className="text-2xl font-bold text-blue-700">INDO-BHUTAN TAXI </div>
+        <div className="text-2xl font-bold text-blue-700">INDO-BHUTAN TRAVELS</div>
 
         {/* Desktop nav links */}
         <ul className="hidden lg:flex gap-6 items-center text-gray-800 font-medium">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="Blog">Blog</Link></li>
+          <li><Link href="/travelpacages">Pacages</Link></li>
+          <li><Link href="/car-rent">Car-Rent</Link></li>
         </ul>
 
         {/* 24/7 Badge */}
@@ -28,9 +28,9 @@ export default function Navbar() {
           <span className="bg-blue-600 text-white px-3 py-1 rounded text-sm font-semibold">
             24x7 Support
           </span>
-          <a href="tel:09004545000" className="text-blue-600 font-medium text-sm">
+          <Link href="tel:09004545000" className="text-blue-600 font-medium text-sm">
             090 4545 0000
-          </a>
+          </Link>
         </div>
 
         {/* Mobile menu toggle */}
@@ -45,17 +45,17 @@ export default function Navbar() {
       {isOpen && (
         <div className="lg:hidden bg-white border-t">
           <ul className="flex flex-col gap-4 px-4 py-3 text-gray-800 font-medium">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><Link href="#">Home</Link></li>
+            <li><Link href="#">Blog</Link></li>
+            <li><Link href="#">Services</Link></li>
+            <li><Link href="#">Contact</Link></li>
             <li className="flex items-center gap-2">
               <span className="bg-blue-600 text-white px-3 py-1 rounded text-sm font-semibold">
                 24x7
               </span>
-              <a href="tel:09004545000" className="text-blue-600 font-medium text-sm">
+              <Link href="tel:09004545000" className="text-blue-600 font-medium text-sm">
                 090 4545 0000
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
