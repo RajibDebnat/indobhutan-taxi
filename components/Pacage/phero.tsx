@@ -16,50 +16,69 @@ export default function TourPackagesHero() {
             {
               title: "Bhutan Tour",
               desc: "Discover the serene monasteries, lush valleys, and vibrant culture of Bhutan.",
-              image: "/tours/bhutan.jpg",
+              price: "₹18,999",
+              image: "/pacages/bhutan-gate.jpg",
             },
             {
               title: "India Tour",
               desc: "From heritage cities to spiritual destinations – explore India like never before.",
-              image: "/tours/india.jpg",
+              price: "₹15,499",
+              image: "/details/delhi-trip-plan-india.webp",
             },
             {
               title: "Boxa Tour",
               desc: "A perfect getaway into the wilderness of West Bengal’s hidden gem – Boxa.",
-              image: "/tours/boxa.jpg",
+              price: "₹12,999",
+              image: "/pacages/boxa-tour.webp",
             },
             {
               title: "Jaldapara Tour",
               desc: "Experience the wildlife and scenic beauty of Jaldapara National Park.",
-              image: "/tours/jaldapara.jpg",
+              price: "₹13,499",
+              image: "/pacages/jaldapara.jpg",
             },
             {
               title: "Kalimpong & Lava",
               desc: "Enjoy the tranquility of the hills in Kalimpong, Lava & surrounding regions.",
-              image: "/tours/kalimpong.jpg",
+              price: "₹16,999",
+              image: "/pacages/Lava-Kalimpong.webp",
             },
             {
               title: "Thimphu & Paro",
               desc: "Visit Bhutan's iconic cities with beautiful landscapes and ancient dzongs.",
-              image: "/tours/thimphu-paro.jpg",
+              price: "₹20,999",
+              image: "/pacages/paro.jpg",
             },
           ].map((tour, idx) => (
             <div
               key={idx}
-              className="bg-white border shadow-md rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] active:scale-[0.97]"
+              className="bg-white border shadow-md rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] active:scale-[0.97] flex flex-col justify-between"
             >
-              {/* <img
+              <img
                 src={tour.image}
                 alt={tour.title}
                 className="w-full h-48 object-cover"
-              /> */}
-              <div className="p-5">
+              />
+              <div className="p-5 flex flex-col gap-3">
                 <h3 className="text-xl font-semibold font-montserrat text-blue-800">
                   {tour.title}
                 </h3>
-                <p className="mt-2 text-sm text-gray-600 font-outfit">
+                <p className="text-sm text-gray-600 font-outfit">
                   {tour.desc}
                 </p>
+                <p className="text-base text-green-600 font-bold">
+                  Price: {tour.price}
+                </p>
+                <div className="flex flex-col gap-2 mt-2">
+                  <input
+                    type="text"
+                    placeholder="Add Your Number"
+                    className="border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  />
+                  <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+                    Inquire
+                  </button>
+                </div>
               </div>
             </div>
           ))}

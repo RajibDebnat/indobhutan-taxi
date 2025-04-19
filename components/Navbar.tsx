@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-white  z-50 px-24 max-xl:px-12 max-lg:px-0   ">
+    <header className="bg-white   sticky top-0 z-50 px-24 max-xl:px-12 max-lg:px-0   ">
       {/* Top bar removed since we're showing 24/7 in the main navbar */}
 
       {/* Main navbar */}
