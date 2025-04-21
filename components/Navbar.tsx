@@ -5,19 +5,19 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  console.log(isOpen);
   return (
-    <header className="bg-white   sticky top-0 z-50 px-24 max-xl:px-12 max-lg:px-0   ">
+    <header className="bg-white   sticky top-0 z-50 px-24 max-xl:px-12 max-lg:px-2   ">
       {/* Top bar removed since we're showing 24/7 in the main navbar */}
 
       {/* Main navbar */}
-      <nav className="flex justify-between items-center px-4 py-3  max-lg:px-0">
+      <nav className="flex justify-between items-center px-4 py-3  max-lg:px-0 ">
         {/* Logo */}
         <div className="text-2xl font-bold text-blue-700">INDO-BHUTAN TRAVELS</div>
 
         {/* Desktop nav links */}
         <ul className="hidden lg:flex gap-6 items-center text-gray-800 font-medium">
-          <li><Link href="/">Home</Link></li>
+          <li ><Link  href="/">Home</Link></li>
           <li><Link href="Blog">Blog</Link></li>
           <li><Link href="/travelpacages">Pacages</Link></li>
           <li><Link href="/car-rent">Car-Rent</Link></li>
@@ -43,12 +43,12 @@ export default function Navbar() {
 
       {/* Mobile nav menu */}
       {isOpen && (
-        <div className="lg:hidden bg-white border-t">
+        <div className="lg:hidden bg-white border-t ">
           <ul className="flex flex-col gap-4 px-4 py-3 text-gray-800 font-medium">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/blog">Blog</Link></li>
-            <li><Link href="/travelpacages">Pacages</Link></li>
-            <li><Link href="/car-rent">Car-rent</Link></li>
+            <li><Link onClick={()=>setIsOpen(prev=>!prev)} href="/">Home</Link></li>
+            <li><Link onClick={()=>setIsOpen(prev=>!prev)} href="/blog">Blog</Link></li>
+            <li><Link onClick={()=>setIsOpen(prev=>!prev)} href="/travelpacages">Pacages</Link></li>
+            <li><Link onClick={()=>setIsOpen(prev=>!prev)} href="/car-rent">Car-rent</Link></li>
             <li className="flex items-center gap-2">
               <span className="bg-blue-600 text-white px-3 py-1 rounded text-sm font-semibold">
                 24x7

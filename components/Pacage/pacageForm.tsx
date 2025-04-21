@@ -35,11 +35,11 @@ export default function InquiryForm() {
 
   return (
     <div className=" flex  items-center  text-left bg-gray-50">
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white shadow-md p-6 rounded-lg space-y-4">
+      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white shadow-md  rounded-lg space-y-4">
        
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Name</label>
+          {/* <label className="block text-sm font-medium text-gray-700">Name</label> */}
           <input
             type="text"
             name="name"
@@ -52,7 +52,7 @@ export default function InquiryForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+          {/* <label className="block text-sm font-medium text-gray-700">Phone Number</label> */}
           <input
             type="tel"
             name="phone"

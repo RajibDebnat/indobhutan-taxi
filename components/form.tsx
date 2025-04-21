@@ -115,7 +115,7 @@ export default function CabBookingForm() {
 
   return (
     <div className="min-h-screen flex justify-center items-center p-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-xl bg-white rounded-xl shadow-lg p-8 space-y-4">
+      <form onSubmit={handleSubmit} className=" w-xl max-sm:w-full bg-white rounded-xl shadow-lg p-8 space-y-4">
         <h2 className="text-2xl font-bold text-center text-blue-700">Cab Booking Form</h2>
 
         <div className="grid grid-cols-1 text-left text-slate-900 sm:grid-cols-2 gap-4">

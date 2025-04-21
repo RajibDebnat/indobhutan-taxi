@@ -9,7 +9,7 @@ const Footer = () => {
 
         {/* Logo & Description */}
         <div>
-          <Image src="/images/logo.png" alt="Indo-Bhutan Taxi Service Logo" width={120} height={60} />
+          <h6>INDO-BHUTAN TRAVELS</h6>
           <p className="mt-4 text-sm">
             Indo-Bhutan Taxi Service is India's largest chauffeur-driven car rental service. Safe, reliable, and hassle-free travel across 2000+ cities.
           </p>
@@ -46,10 +46,10 @@ const Footer = () => {
           <p className="text-sm mb-4">📧 support@Indo-Bhutan Taxi Service.com</p>
 
           <div className="flex gap-4 text-xl text-gray-600">
-            <a href="#" className="hover:text-blue-600"><FaFacebookF /></a>
-            <a href="#" className="hover:text-sky-400"><FaTwitter /></a>
-            <a href="#" className="hover:text-pink-600"><FaInstagram /></a>
-            <a href="#" className="hover:text-red-600"><FaYoutube /></a>
+            <Link href="#" className="hover:text-blue-600"><FaFacebookF /></Link>
+            <Link href="#" className="hover:text-sky-400"><FaTwitter /></Link>
+            <Link href="#" className="hover:text-pink-600"><FaInstagram /></Link>
+            <Link href="#" className="hover:text-red-600"><FaYoutube /></Link>
           </div>
 
           
