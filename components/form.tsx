@@ -1,8 +1,7 @@
-// app/page.tsx or app/home/page.tsx
 'use client';
 import { useState, useRef, useEffect } from "react";
 
-export default function Home() {
+export default function CabBookingForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,69 +14,78 @@ export default function Home() {
     message: "",
   });
 
-  // Location suggestions state
+  const [status, setStatus] = useState("");
+
+  const defaultLocations = [
+    "IXB Bagdogra Airport", "Jaigaon", "Phuentsholing, Bhutan",
+    "Siliguri", "Kolkata", "Thimphu, Bhutan",
+    "Alipurduar", "Darjeeling", "Gangtok", "Kalimpong",
+  ];
   const [fromSuggestions, setFromSuggestions] = useState<string[]>([]);
   const [toSuggestions, setToSuggestions] = useState<string[]>([]);
   const [fromFocused, setFromFocused] = useState(false);
   const [toFocused, setToFocused] = useState(false);
-  
-  // Refs for handling click outside
   const fromRef = useRef<HTMLDivElement>(null);
   const toRef = useRef<HTMLDivElement>(null);
-
-  const [status, setStatus] = useState("");
-
-  // Default location suggestions
-  const defaultLocations = [
-    "IXB Bagdogra Airport",
-    "Jaigaon",
-    "Phuentsholing, Bhutan",
-    "Siliguri",
-    "Kolkata",
-    "Thimphu, Bhutan",
-    "Alipurduar",
-    "Darjeeling",
-    "Gangtok",
-    "kalimpong",
-    
-   
-
-
-
-
-  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
-    // Handle location filtering for from and to fields
+
     if (name === "from") {
-      if (value.trim() === '') {
-        setFromSuggestions(defaultLocations);
-      } else {
-        const filtered = defaultLocations.filter(location => 
-          location.toLowerCase().includes(value.toLowerCase())
-        );
-        setFromSuggestions(filtered);
-      }
+      setFromSuggestions(
+        value.trim() ? defaultLocations.filter(location =>
+          location.toLowerCase().includes(value.toLowerCase())) : defaultLocations
+      );
     } else if (name === "to") {
-      if (value.trim() === '') {
-        setToSuggestions(defaultLocations);
-      } else {
-        const filtered = defaultLocations.filter(location => 
-          location.toLowerCase().includes(value.toLowerCase())
-        );
-        setToSuggestions(filtered);
-      }
+      setToSuggestions(
+        value.trim() ? defaultLocations.filter(location =>
+          location.toLowerCase().includes(value.toLowerCase())) : defaultLocations
+      );
     }
   };
+
+  const handleSelectFrom = (location: string) => {
+    setFormData({ ...formData, from: location });
+    setFromSuggestions([]);
+    setFromFocused(false);
+  };
+
+  const handleSelectTo = (location: string) => {
+    setFormData({ ...formData, to: location });
+    setToSuggestions([]);
+    setToFocused(false);
+  };
+
+  const handleFromFocus = () => {
+    setFromFocused(true);
+    setFromSuggestions(defaultLocations);
+  };
+
+  const handleToFocus = () => {
+    setToFocused(true);
+    setToSuggestions(defaultLocations);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (fromRef.current && !fromRef.current.contains(e.target as Node)) {
+        setFromFocused(false);
+      }
+      if (toRef.current && !toRef.current.contains(e.target as Node)) {
+        setToFocused(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("Sending...");
+
     try {
-      const res = await fetch("/api/book", {
+      const res = await fetch("/api/sendmail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -97,122 +105,35 @@ export default function Home() {
           message: "",
         });
       } else {
-        setStatus("Failed to send booking. Try again.");
+        setStatus("Failed to send booking. Please try again.");
       }
     } catch (err) {
       console.error(err);
-      setStatus("Error sending booking.");
+      setStatus("Something went wrong!");
     }
   };
 
-  // Location selection handlers
-  const handleSelectFrom = (location: string) => {
-    setFormData({ ...formData, from: location });
-    setFromSuggestions([]);
-    setFromFocused(false);
-  };
-  
-  const handleSelectTo = (location: string) => {
-    setFormData({ ...formData, to: location });
-    setToSuggestions([]);
-    setToFocused(false);
-  };
-  
-  const handleFromFocus = () => {
-    setFromFocused(true);
-    setFromSuggestions(defaultLocations);
-  };
-  
-  const handleToFocus = () => {
-    setToFocused(true);
-    setToSuggestions(defaultLocations);
-  };
-
-  // Handle clicks outside the location dropdowns
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (fromRef.current && !fromRef.current.contains(event.target as Node)) {
-        setFromFocused(false);
-      }
-      if (toRef.current && !toRef.current.contains(event.target as Node)) {
-        setToFocused(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
   return (
     <div className="min-h-screen flex justify-center items-center p-4">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-xl bg-white rounded-xl shadow-lg p-8 space-y-4"
-      >
-        <h2 className="text-2xl font-bold text-center text-blue-700">
-          Cab Booking Form
-        </h2>
+      <form onSubmit={handleSubmit} className="w-full max-w-xl bg-white rounded-xl shadow-lg p-8 space-y-4">
+        <h2 className="text-2xl font-bold text-center text-blue-700">Cab Booking Form</h2>
 
         <div className="grid grid-cols-1 text-left text-slate-900 sm:grid-cols-2 gap-4">
-          {/* Name */}
           <div>
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="input"
-              placeholder="Enter your full name"
-              title="Full Name"
-            />
+            <label title="Enter your full name">Name</label>
+            <input name="name" placeholder="Enter your full name" value={formData.name} onChange={handleChange} required className="input" />
           </div>
-
-          {/* Email */}
           <div>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              type="email"
-              required
-              className="input"
-              placeholder="Enter your email"
-              title="Email Address"
-            />
+            <label title="Enter your email address">Email</label>
+            <input type="email" name="email" placeholder="Enter your email address" value={formData.email} onChange={handleChange} required className="input" />
           </div>
-
-          {/* Phone */}
           <div>
-            <label htmlFor="phone">Phone</label>
-            <input
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              className="input"
-              placeholder="Enter your phone number"
-              title="Phone Number"
-            />
+            <label title="Enter your contact number">Phone</label>
+            <input name="phone" placeholder="Enter your phone number" value={formData.phone} onChange={handleChange} required className="input" />
           </div>
-
-          {/* Trip Type */}
           <div>
-            <label htmlFor="tripType">Trip Type</label>
-            <select
-              id="tripType"
-              name="tripType"
-              value={formData.tripType}
-              onChange={handleChange}
-              className="input"
-              title="Select your trip type"
-            >
+            <label title="Select your trip type">Trip Type</label>
+            <select title="trip type" name="tripType" value={formData.tripType} onChange={handleChange} className="input">
               <option value="oneway">One Way</option>
               <option value="roundtrip">Round Trip</option>
               <option value="local">Local</option>
@@ -220,118 +141,46 @@ export default function Home() {
             </select>
           </div>
 
-          {/* From - with autosuggest */}
           <div ref={fromRef} className="relative">
-            <label htmlFor="from">From</label>
-            <input
-              id="from"
-              name="from"
-              value={formData.from}
-              onChange={handleChange}
-              onFocus={handleFromFocus}
-              required
-              className="input"
-              placeholder="Pickup location"
-              title="Pickup Location"
-            />
-            {/* From Suggestions Dropdown */}
+            <label title="Enter or select your pickup location">From</label>
+            <input name="from" placeholder="Pickup location" value={formData.from} onChange={handleChange} onFocus={handleFromFocus} required className="input" />
             {fromFocused && fromSuggestions.length > 0 && (
               <ul className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
-                {fromSuggestions.map((location, index) => (
-                  <li 
-                    key={index}
-                    onClick={() => handleSelectFrom(location)}
-                    className="px-4 py-2 hover:bg-blue-100 cursor-pointer text-gray-700"
-                  >
-                    {location}
-                  </li>
+                {fromSuggestions.map((loc, i) => (
+                  <li key={i} onClick={() => handleSelectFrom(loc)} className="px-4 py-2 hover:bg-blue-100 cursor-pointer text-gray-700">{loc}</li>
                 ))}
               </ul>
             )}
           </div>
 
-          {/* To - with autosuggest */}
           <div ref={toRef} className="relative">
-            <label htmlFor="to">To</label>
-            <input
-              id="to"
-              name="to"
-              value={formData.to}
-              onChange={handleChange}
-              onFocus={handleToFocus}
-              required
-              className="input"
-              placeholder="Drop-off location"
-              title="Drop-off Location"
-            />
-            {/* To Suggestions Dropdown */}
+            <label title="Enter or select your drop-off location">To</label>
+            <input name="to" placeholder="Drop-off location" value={formData.to} onChange={handleChange} onFocus={handleToFocus} required className="input" />
             {toFocused && toSuggestions.length > 0 && (
               <ul className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
-                {toSuggestions.map((location, index) => (
-                  <li 
-                    key={index}
-                    onClick={() => handleSelectTo(location)}
-                    className="px-4 py-2 hover:bg-blue-100 cursor-pointer text-gray-700"
-                  >
-                    {location}
-                  </li>
+                {toSuggestions.map((loc, i) => (
+                  <li key={i} onClick={() => handleSelectTo(loc)} className="px-4 py-2 hover:bg-blue-100 cursor-pointer text-gray-700">{loc}</li>
                 ))}
               </ul>
             )}
           </div>
 
-          {/* Date */}
           <div>
-            <label htmlFor="pickupDate">Pick Up Date</label>
-            <input
-              id="pickupDate"
-              type="date"
-              name="pickupDate"
-              value={formData.pickupDate}
-              onChange={handleChange}
-              required
-              className="input"
-              title="Select pickup date"
-            />
+            <label title="Select your pickup date">Pick Up Date</label>
+            <input type="date" placeholder="pickup date" name="pickupDate" value={formData.pickupDate} onChange={handleChange} required className="input" />
           </div>
-
-          {/* Time */}
           <div>
-            <label htmlFor="pickupTime">Pick Up Time</label>
-            <input
-              id="pickupTime"
-              type="time"
-              name="pickupTime"
-              value={formData.pickupTime}
-              onChange={handleChange}
-              required
-              className="input"
-              title="Select pickup time"
-            />
+            <label title="Select your pickup time">Pick Up Time</label>
+            <input placeholder="pickup time" type="time" name="pickupTime" value={formData.pickupTime} onChange={handleChange} required className="input" />
           </div>
         </div>
 
-        {/* Message */}
         <div>
-          <label htmlFor="message">Additional Message</label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            className="input h-24 text-black"
-            placeholder="Any special instructions or requests"
-            title="Message"
-          />
+          <label title="Add any special instructions or additional details">Additional Message</label>
+          <textarea name="message" placeholder="Any special instructions" value={formData.message} onChange={handleChange} className=" text-black input h-24" />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl"
-        >
-          Book Now
-        </button>
-
+        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl">Book Now</button>
         <p className="text-center text-sm text-gray-600">{status}</p>
       </form>
 

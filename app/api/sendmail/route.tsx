@@ -1,39 +1,45 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 export async function POST(req: Request) {
   const body = await req.json();
+  const {
+    name,
+    email,
+    phone,
+    from,
+    to,
+    pickupDate,
+    pickupTime,
+    tripType,
+    message,
+  } = body;
 
-  const { tripType, from, to, date, time } = body;
-
-  // Setup transport
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.MAIL_USER, // your email
-      pass: process.env.MAIL_PASS, // your app password
-    },
-  });
-
-  const mailOptions = {
-    from: `"Cab Booking Form" <${process.env.MAIL_USER}>`,
-    to: process.env.MAIL_USER,
-    subject: `New Booking - ${tripType}`,
+  const msg = {
+    to: process.env.TO as string, // Your email to receive the booking
+    from:process.env.FROM as string, // Must be a verified sender in SendGrid
+    subject: `New Cab Booking Request - ${tripType}`,
     html: `
-      <h2>New Cab Booking Request</h2>
+      <h2>New Cab Booking</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
       <p><strong>Trip Type:</strong> ${tripType}</p>
       <p><strong>From:</strong> ${from}</p>
       <p><strong>To:</strong> ${to}</p>
-      <p><strong>Date:</strong> ${date}</p>
-      <p><strong>Time:</strong> ${time}</p>
+      <p><strong>Pickup Date:</strong> ${pickupDate}</p>
+      <p><strong>Pickup Time:</strong> ${pickupTime}</p>
+      <p><strong>Message:</strong> ${message || "N/A"}</p>
     `,
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: "Email send failed" }, { status: 500 });
+    await sgMail.send(msg);
+    return NextResponse.json({ success: true, message: "Email sent successfully" });
+  } catch (error) {
+    console.error("SendGrid Error:", error);
+    return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
   }
 }
